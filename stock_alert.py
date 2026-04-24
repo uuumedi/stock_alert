@@ -1,19 +1,19 @@
 import yfinance as yf
 import pandas as pd
 import requests
-import os # ← ★これを追加します
+import os
 from datetime import datetime
 
 # ==========================================
 # 設定部分
 # ==========================================
-# 直接書かずに、環境変数（シークレット）から取得するように変更
+# GitHubのSecrets（金庫）からトークンを読み込む
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 CHAT_ID = os.environ.get("CHAT_ID")
 
-# 万が一取得できなかった場合のエラー処理
+# トークンが取得できなかった場合の安全装置
 if not TELEGRAM_TOKEN or not CHAT_ID:
-    print("エラー: TELEGRAM_TOKEN または CHAT_ID が設定されていません。")
+    print("エラー: TELEGRAM_TOKEN または CHAT_ID が取得できませんでした。GitHubのSecrets設定を確認してください。")
     exit()
 
 # 監視する銘柄リスト（大型株・主要銘柄）
