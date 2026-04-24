@@ -19,7 +19,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install yfinance pandas requests
       - name: Run script
-        env: # ★ここから下を追加
+        env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python stock_alert.py
