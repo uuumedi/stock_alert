@@ -2,9 +2,8 @@ name: Daily Stock Alert
 
 on:
   schedule:
-    # 日本時間の12:00は、UTC（協定世界時）の03:00になります
     - cron: '0 3 * * *'
-  workflow_dispatch: # 手動でも実行できるようにする設定
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,4 +19,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install yfinance pandas requests
       - name: Run script
+        env: # ★ここから下を追加
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python stock_alert.py
