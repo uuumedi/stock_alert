@@ -1,13 +1,20 @@
 import yfinance as yf
 import pandas as pd
 import requests
+import os # ← ★これを追加します
 from datetime import datetime
 
 # ==========================================
 # 設定部分
 # ==========================================
-TELEGRAM_TOKEN = "8671392597:AAFQQkLQ4HSiopBrEZQ7fpV458SU6hUd1nU"
-CHAT_ID = "8797265697"
+# 直接書かずに、環境変数（シークレット）から取得するように変更
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
+
+# 万が一取得できなかった場合のエラー処理
+if not TELEGRAM_TOKEN or not CHAT_ID:
+    print("エラー: TELEGRAM_TOKEN または CHAT_ID が設定されていません。")
+    exit()
 
 # 監視する銘柄リスト（大型株・主要銘柄）
 tickers = {
